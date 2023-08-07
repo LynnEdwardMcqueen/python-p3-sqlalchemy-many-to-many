@@ -10,6 +10,19 @@ metadata = MetaData(naming_convention=convention)
 
 Base = declarative_base(metadata=metadata)
 
+class User(Base):
+    __tablename__ = 'users'
+
+    id = Column(Integer(), primary_key=True)
+    name = Column(String())
+    created_at = Column(DateTime(), server_default=func.now())
+    updated_at = Column(DateTime(), onupdate=func.now())
+
+    # don't forget your __repr__()!
+    def __repr__(self):
+        return f'User(id={self.id}, ' + \
+            f'name={self.name})'
+    
 class Game(Base):
     __tablename__ = 'games'
 
